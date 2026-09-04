@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MAGNUS — Precision coaching for JEE & NEET</title>
+<title>Magnus Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +20,32 @@
     --cyan:#74e8ff;
     --violet:#8b7cff;
     --frame-radius:30px;
+    --button-ink:#05070f;
+    --overlay:rgba(2,6,17,0.55);
+  }
+
+  html[data-theme="light"]{
+    --void:#edf4ff;
+    --frame-top:#ffffff;
+    --frame-bot:#e9f2ff;
+    --line:rgba(20,55,100,0.14);
+    --ink:#10213b;
+    --ink-dim:rgba(16,33,59,0.66);
+    --ink-faint:rgba(16,33,59,0.4);
+    --button-ink:#ffffff;
+    --overlay:rgba(225,237,255,0.42);
+  }
+
+  html[data-theme="light"] .hero-copy h1,
+  html[data-theme="light"] .hero-copy p,
+  html[data-theme="light"] .hero-copy .cta-row{
+    text-shadow:none;
+  }
+
+  html[data-theme="light"] .hero-copy h1 .line,
+  html[data-theme="light"] .hero-copy h1 .word,
+  html[data-theme="light"] .hero-copy h1 .char{
+    background:transparent;
   }
 
   *{ box-sizing:border-box; }
@@ -72,7 +98,7 @@
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, transparent 40%, rgba(2,6,17,0.55) 100%);
+    background:linear-gradient(180deg, transparent 40%, var(--overlay) 100%);
     pointer-events:none;
     z-index:1;
   }
@@ -88,6 +114,8 @@
   }
 
   .brand{
+    position:relative;
+    z-index:10;
     display:flex;
     align-items:center;
     gap:10px;
@@ -97,6 +125,60 @@
   }
 
   .brand svg{ display:block; }
+
+  .brand-mark{
+    width:22px;
+    height:22px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .brand-mark:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:4px;
+    border-radius:6px;
+  }
+  .theme-menu{
+    position:absolute;
+    top:calc(100% + 12px);
+    left:-8px;
+    z-index:20;
+    min-width:132px;
+    padding:6px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--frame-top);
+    box-shadow:0 16px 36px rgba(2,6,17,0.2);
+    pointer-events:auto;
+  }
+  .theme-menu[hidden]{ display:none; }
+  .theme-menu a{
+    display:block;
+    width:100%;
+    padding:9px 12px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:var(--ink);
+    text-align:left;
+    font:600 0.8rem/1.2 'Manrope', system-ui, sans-serif;
+    cursor:pointer;
+    pointer-events:auto;
+    touch-action:manipulation;
+    user-select:none;
+    -webkit-tap-highlight-color:transparent;
+    text-decoration:none;
+  }
+  .theme-menu a:hover,
+  .theme-menu a[aria-checked="true"]{
+    background:rgba(22,137,254,0.12);
+    color:var(--ink);
+  }
 
   .nav-links{
     display:flex;
@@ -128,7 +210,7 @@
     align-items:center;
     gap:8px;
     background:#f4f7fb;
-    color:#05070f;
+    color:var(--button-ink);
     font-weight:600;
     font-size:0.85rem;
     padding:11px 20px;
@@ -176,6 +258,7 @@
   }
 
   h1 .line{ display:block; overflow:hidden; }
+  h1 .line{ padding-bottom:0.12em; margin-bottom:-0.12em; }
   h1 .word{ display:inline-block; }
   h1 .char{ display:inline-block; }
 
@@ -241,31 +324,32 @@
   .btn-primary .arrow{ transition:transform .3s ease; }
   .btn-primary:hover .arrow{ transform:translate(3px,-2px); }
 
-  .link-secondary{
+  .btn-secondary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
     font-size:0.88rem;
     color:var(--ink-dim);
-    border-bottom:1px solid rgba(244,247,251,0.22);
-    padding-bottom:2px;
-    transition:color .25s ease, border-color .25s ease;
+    background:rgba(255,255,255,0.035);
+    border:1px solid rgba(244,247,251,0.18);
+    padding:13px 24px;
+    border-radius:999px;
+    transition:color .25s ease, border-color .25s ease, background .25s ease, transform .25s ease;
   }
-  .link-secondary:hover{ color:var(--ink); border-color:rgba(244,247,251,0.5); }
+  .btn-secondary:hover{
+    color:var(--ink);
+    border-color:rgba(116,232,255,0.5);
+    background:rgba(22,137,254,0.12);
+    transform:translateY(-2px);
+  }
 
   /* ---------- responsive ---------- */
   @media (max-width: 640px){
     nav{
-      flex-wrap:wrap;
-      row-gap:14px;
-      padding:20px 22px 16px;
+      padding:20px 22px;
     }
     .nav-actions{ margin-left:auto; }
-    .nav-links{
-      display:flex;
-      order:3;
-      width:100%;
-      justify-content:space-between;
-      gap:14px;
-      font-size:0.75rem;
-    }
+    .nav-links{ display:none; }
     .btn-ghost{
       display:inline-flex;
       align-items:center;
@@ -290,17 +374,22 @@
 
   <nav>
     <div class="brand">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <circle cx="11" cy="11" r="2.6" fill="#f4f7fb"/>
-        <ellipse cx="11" cy="11" rx="10" ry="4.2" stroke="#74e8ff" stroke-width="1.2"/>
-        <ellipse cx="11" cy="11" rx="10" ry="4.2" stroke="#1689fe" stroke-width="1.2" transform="rotate(60 11 11)"/>
-        <ellipse cx="11" cy="11" rx="10" ry="4.2" stroke="#8b7cff" stroke-width="1.2" transform="rotate(120 11 11)"/>
-      </svg>
+      <button class="brand-mark" id="theme-menu-toggle" type="button" aria-label="Choose color theme" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="2.6" fill="currentColor"/>
+          <ellipse cx="11" cy="11" rx="10" ry="4.2" stroke="#74e8ff" stroke-width="1.2"/>
+          <ellipse cx="11" cy="11" rx="10" ry="4.2" stroke="#1689fe" stroke-width="1.2" transform="rotate(60 11 11)"/>
+          <ellipse cx="11" cy="11" rx="10" ry="4.2" stroke="#8b7cff" stroke-width="1.2" transform="rotate(120 11 11)"/>
+        </svg>
+      </button>
       MAGNUS
+      <div class="theme-menu" id="theme-menu" role="menu" hidden>
+        <a href="?theme=light" role="menuitemradio" data-theme-choice="light" aria-checked="true">Light theme</a>
+        <a href="?theme=dark" role="menuitemradio" data-theme-choice="dark" aria-checked="false">Dark theme</a>
+      </div>
     </div>
 
     <div class="nav-links">
-      <a href="#">Courses</a>
       <a href="#">Faculty</a>
       <a href="#">Results</a>
     </div>
@@ -316,7 +405,7 @@
       <p>Live doubt-clearing, personalised mark tracking, and a faculty team built around one goal — your rank.</p>
       <div class="cta-row">
         <button class="btn-primary">Start free trial <span class="arrow">↗</span></button>
-        <a class="link-secondary" href="#">See how it works</a>
+        <a class="btn-secondary" href="#">Courses</a>
       </div>
     </div>
 
@@ -324,6 +413,67 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =========================================================
+   Theme menu
+   ========================================================= */
+(function themeMenu(){
+  const root = document.documentElement;
+  const brand = document.querySelector('.brand');
+  const toggle = document.getElementById('theme-menu-toggle');
+  const menu = document.getElementById('theme-menu');
+  const choices = [...menu.querySelectorAll('[data-theme-choice]')];
+
+  const queryTheme = new URLSearchParams(location.search).get('theme');
+  if(queryTheme === 'dark' || queryTheme === 'light'){
+    root.dataset.theme = queryTheme;
+  }else{
+    try{
+      const saved = localStorage.getItem('magnus-theme');
+      if(saved === 'dark') root.dataset.theme = 'dark';
+    }catch(err){}
+  }
+
+  function updateChoices(){
+    const activeTheme = root.dataset.theme === 'dark' ? 'dark' : 'light';
+    choices.forEach(choice => {
+      choice.setAttribute('aria-checked', String(choice.dataset.themeChoice === activeTheme));
+    });
+  }
+
+  function closeMenu(){
+    menu.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', event => {
+    event.stopPropagation();
+    menu.hidden = !menu.hidden;
+    toggle.setAttribute('aria-expanded', String(!menu.hidden));
+  });
+
+  function chooseTheme(event){
+    event.stopPropagation();
+    const choice = event.target.closest('[data-theme-choice]');
+    if(!choice) return;
+    const nextTheme = choice.dataset.themeChoice;
+    root.dataset.theme = nextTheme;
+    try{ localStorage.setItem('magnus-theme', nextTheme); }catch(err){}
+    updateChoices();
+    closeMenu();
+  }
+
+  menu.addEventListener('pointerup', chooseTheme);
+  menu.addEventListener('click', chooseTheme);
+
+  document.addEventListener('click', event => {
+    if(!brand.contains(event.target)) closeMenu();
+  });
+
+  updateChoices();
+})();
+</script>
+
 <script>
 /* =========================================================
    Headline: character-reveal, same treatment as the source
